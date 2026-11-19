@@ -4,6 +4,7 @@
 
 #include "cmf.h"
 #include "cmf/memallocator.h"
+#include <cstring>
 #include <vector>
 #include <memory>
 

@@ -2,6 +2,7 @@
 
 #include "cmf/memallocator.h"
 #include "cmf/compression.h"
+#include <cstring>
 
 namespace cmf
 {
