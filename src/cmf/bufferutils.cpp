@@ -4,6 +4,7 @@
 #include "cmf/bufferstreams.h"
 #include "cmf/declutils.h"
 #include <meshoptimizer.h>
+#include <cstring>
 #include <numeric>
 
 namespace

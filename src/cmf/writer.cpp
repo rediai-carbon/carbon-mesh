@@ -4,6 +4,7 @@
 #include "cmf/utils.h"
 #include "cmf/compression.h"
 #include "meshoptimizer.h"
+#include <cstring>
 
 namespace
 {
