@@ -200,11 +200,16 @@ add_subdirectory (src/cmf/test)
 enable_testing()
 add_test(NAME cmftest COMMAND cmftest)
 
+# A library consumer. This is not the viewer or the processor, and it does not
+# enable BUILD_TOOLS or Simplygon.
+add_executable(cmf_consumer demo/cmf_cube.cpp)
+target_link_libraries(cmf_consumer PRIVATE CarbonMesh)
+
 # GCC 15 reports template parsing notes inside its own <ratio> headers as
 # errors when COMPILE_WARNING_AS_ERROR is set. The notes are not in this
 # library. Keep every other warning as an error.
 if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU" AND CMAKE_CXX_COMPILER_VERSION VERSION_GREATER_EQUAL 15)
-    foreach(mesh_target CarbonMesh cmftest)
+    foreach(mesh_target CarbonMesh cmftest cmf_consumer)
         if(TARGET ${mesh_target})
             target_compile_options(${mesh_target} PRIVATE -Wno-error=template-body)
         endif()
