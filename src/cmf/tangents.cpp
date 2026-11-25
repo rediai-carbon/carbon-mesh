@@ -266,8 +266,6 @@ bool GenerateTangents( Mesh& mesh, uint32_t usageIndex, const FlipTangentOptions
 				for( auto& morphTarget : lod.morphTargets )
 				{
 					auto newVb = ChangeBufferVertexDeclaration( morphTarget.vb, mesh.morphTargets.decl, newVertexDeclaration, allocator, bufferManager );
-					auto newTangents = BufferElementStream<Vector3>( newTangentElement, newVb, bufferManager );
-					auto newBitangents = BufferElementStream<Vector3>( newBitangentElement, newVb, bufferManager );
 
 					GenerateMikkTSpaceTangents(
 						ConstBufferElementStream<Vector3>( *positionElement, morphTarget.vb, bufferManager ),
