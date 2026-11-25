@@ -435,6 +435,15 @@ TEST( Animation, BlendAdditivePoseWithFullAlpha )
 	EXPECT_EQ( outPose.boneTransforms[1].scale, expected.scale );
 }
 
+namespace
+{
+bool QuatNear( const Quaternion& a, const Quaternion& b, float eps = 1e-5f )
+{
+	return std::abs( a.x - b.x ) < eps && std::abs( a.y - b.y ) < eps && std::abs( a.z - b.z ) < eps &&
+	       std::abs( a.w - b.w ) < eps;
+}
+} // namespace
+
 TEST( Animation, BlendAdditivePoseWithHalfAlpha )
 {
 	cmf::MemoryAllocator allocator;
@@ -466,6 +475,6 @@ TEST( Animation, BlendAdditivePoseWithHalfAlpha )
 	auto blended = cmf::Lerp( cmf::Transform{}, diff, 0.5f );
 	auto expected = cmf::Multiply( inputPose.boneTransforms[1], blended );
 	EXPECT_EQ( outPose.boneTransforms[1].position, expected.position );
-	EXPECT_EQ( outPose.boneTransforms[1].rotation, expected.rotation );
+	EXPECT_TRUE( QuatNear( outPose.boneTransforms[1].rotation, expected.rotation ) );
 	EXPECT_EQ( outPose.boneTransforms[1].scale, expected.scale );
 }

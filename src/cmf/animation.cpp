@@ -9,6 +9,7 @@
 #include <array>
 #include <algorithm>
 #include <cmath>
+#include <limits>
 
 namespace
 {
@@ -531,7 +532,7 @@ void ComputeWorldTransforms( std::vector<Matrix>& outWorldTransforms, const Skel
 	{
 		const auto& localTransform = pose.boneTransforms[i];
 		const auto localMatrix = TransformationMatrix( localTransform.scale, localTransform.rotation, localTransform.position );
-		if( pose.skeleton->parents[i] != -1 )
+		if( pose.skeleton->parents[i] != std::numeric_limits<uint32_t>::max() )
 		{
 			outWorldTransforms[i] = localMatrix * outWorldTransforms[pose.skeleton->parents[i]];
 		}
